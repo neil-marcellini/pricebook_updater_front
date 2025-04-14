@@ -44,7 +44,7 @@ const onUpdate = () => {
         body: null
     }
     postFormOptions.body = formData
-    fetch(backend_url + 'files/', postFormOptions)
+    fetch(backend_url + 'uploaded_file/', postFormOptions)
         .then((response) => {
             return response.arrayBuffer()
         })

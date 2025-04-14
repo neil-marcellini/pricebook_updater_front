@@ -17,12 +17,11 @@
                 font-family: 'Source Sans Pro', sans-serif;
             }
             #container {
-                margin-top: 3rem;
-                display: grid;
+                display: flex;
+                flex-direction: column;
                 width: 100%;
-                grid-template-columns: auto;
-                grid-row-gap: 1rem;
-                justify-items: center;
+                align-items: center;
+                margin-top: 3rem;
             }
             .title {
                 font-size: 60px;
@@ -52,6 +51,13 @@
                 display: none;
                 width: 5rem;
             }
+            .form {
+                display: grid;
+                width: 100%;
+                grid-template-columns: auto;
+                grid-row-gap: 1rem;
+                justify-items: center;
+            }
         </style>
     </head>
 
@@ -59,32 +65,35 @@
         <div id="container">
             <h1 class="title" >Pricebook Updater</h1>
             <h3> Upload all files to update. </h3>
-            <input id="file_uploader" type="file" multiple 
-                accept=".xlsx, .xlsm, .xlsb, .xltx, .xltm, .xls, .xlt, .xml, .xlam, .xla, .xlw, .xlr" class="form-control form-control-lg" 
-                onchange="onFileChange()" aria-label="Large file input example">
-            <div id="update-options">
-                <div>
-                    <label for="percentage-change" class="form-label">% Change</label>
-                    <input type="number" class="form-control" id="percentage-change" value="5">
+            <form class="form" enctype="multipart/form-data">
+                <input id="file_uploader" type="file" multiple 
+                    accept=".xlsx, .xlsm, .xlsb, .xltx, .xltm, .xls, .xlt, .xml, .xlam, .xla, .xlw, .xlr" class="form-control form-control-lg" 
+                    onchange="onFileChange()" aria-label="Large file input example">
+                <div id="update-options">
+                    <div>
+                        <label for="percentage-change" class="form-label">% Change</label>
+                        <input type="number" class="form-control" id="percentage-change" value="5">
+                    </div>
+                    <div class="check-container">
+                    <input class="form-check-input" type="checkbox" value="" id="round-fifty" checked>
+                    <label class="form-check-label" for="round-fifty">
+                        Round to 50 cents
+                    </label>
+                    </div>
+                    <div>
+                        <label for="round-direction">Rounding Direction</label>
+                        <select class="form-select" name="round direction" id="round-direction">
+                            <option value="Normal">Normal</option>
+                            <option value="Up">Up</option>
+                            <option value="Down">Down</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="check-container">
-                  <input class="form-check-input" type="checkbox" value="" id="round-fifty" checked>
-                  <label class="form-check-label" for="round-fifty">
-                      Round to 50 cents
-                  </label>
-                </div>
-                <div>
-                    <label for="round-direction">Rounding Direction</label>
-                    <select class="form-select" name="round direction" id="round-direction">
-                        <option value="Normal">Normal</option>
-                        <option value="Up">Up</option>
-                        <option value="Down">Down</option>
-                    </select>
-                </div>
-            </div>
-            <ul id="file-list" class="list-group">
-            </ul>
-            <button id="update" class="btn btn-primary" type="button" onclick="onUpdate()">Update</button>
+                <ul id="file-list" class="list-group">
+                </ul>
+                <button id="update" class="btn btn-primary" type="button" onclick="onUpdate()">Update</button>
+
+            </form>
         </div>
         <script src="app.js"></script>
     </body>
